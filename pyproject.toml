@@ -9,6 +9,11 @@ readme = "README.md"
 python = "^3.10"
 fastapi = "^0.95.0"
 uvicorn = {extras = ["standard"], version = "^0.21.1"}
+transformers = "^4.27.2"
+make = "^0.1.6.post2"
+torch = "^2.0.0"
+torchvision = "^0.15.1"
+torchaudio = "^2.0.1"
 
 
 [build-system]
