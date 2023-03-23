@@ -1,0 +1,7 @@
+fastapi
+mangum
+uvicorn
+aws-sam-cli
+openai
+python-dotenv
+httpx
