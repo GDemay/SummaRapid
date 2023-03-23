@@ -1,9 +1,25 @@
+# from fastapi import FastAPI
+# from mangum import Mangum
+
 from fastapi import FastAPI
-import os
+from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
+
 from app.api.endpoints.summarize_endpoints import summarize_router
 
-
-stage = os.environ.get('STAGE', 'dev')
-
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(summarize_router)
+
+
+handler = Mangum(app)

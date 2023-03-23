@@ -1,14 +1,27 @@
-from transformers import AutoTokenizer, BartForConditionalGeneration
-
+import logging
+import os
+import openai
+from dotenv import load_dotenv
+import os
 
 class SummarizeService():
 	def __init__(self):
-		self.model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn")
-		self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large-cnn")
+		load_dotenv()
+		openai.api_key = os.getenv("OPENAI_API_KEY")
 
-	def summarize_text(self, text_to_summarize, max_length=1500):
-		inputs = self.tokenizer([text_to_summarize], max_length=1024, return_tensors="pt", padding='max_length', truncation=True)
-		summary_ids = self.model.generate(inputs["input_ids"], num_beams=2, min_length=0, max_length=max_length)
-		return self.tokenizer.batch_decode(
-			summary_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False
-		)[0]
+	def summarize_text(self, text_to_summarize):
+		if not text_to_summarize:
+			raise ValueError("The text to summarize cannot be empty")
+		response = openai.Completion.create(
+			model="text-davinci-003",
+			prompt=text_to_summarize + "\n\nTl;dr",
+			temperature=0.7,
+			max_tokens=200,
+			top_p=1.0,
+			frequency_penalty=0.0,
+			presence_penalty=1
+			)
+
+		summarized = response["choices"][0]["text"]
+		print(f"Text to summarize:{text_to_summarize} summarized : {summarized}")
+		return summarized
