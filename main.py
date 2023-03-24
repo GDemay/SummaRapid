@@ -1,10 +1,13 @@
 # from fastapi import FastAPI
 # from mangum import Mangum
 
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 from app.api.endpoints.summarize_endpoints import summarize_router
+from app.core.logger_config import setup_logging
+
 
 app = FastAPI()
 
@@ -18,6 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+setup_logging()
+logging.info("FastAPI app started")
 app.include_router(summarize_router)
 
 

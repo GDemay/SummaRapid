@@ -4,13 +4,14 @@ import openai
 from dotenv import load_dotenv
 import os
 from app.core.settings import settings
-
+import logging
 class SummarizeService():
 	def __init__(self):
 		openai.api_key = settings.openai_api_key
 
 	def summarize_text(self, text_to_summarize):
 		if not text_to_summarize:
+			logging.error("Invalid reCAPTCHA response")
 			raise ValueError("The text to summarize cannot be empty")
 		response = openai.Completion.create(
 			model="text-davinci-003",
@@ -22,6 +23,4 @@ class SummarizeService():
 			presence_penalty=1
 			)
 
-		summarized = response["choices"][0]["text"]
-		print(f"Text to summarize:{text_to_summarize} summarized : {summarized}")
-		return summarized
+		return response["choices"][0]["text"]

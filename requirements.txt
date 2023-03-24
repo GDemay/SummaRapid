@@ -5,3 +5,4 @@ aws-sam-cli
 openai
 python-dotenv
 httpx
+colorlog
