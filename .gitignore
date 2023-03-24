@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 template.yaml
+samconfig.toml
 .Python
 build/
 develop-eggs/
