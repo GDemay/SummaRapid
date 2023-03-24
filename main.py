@@ -4,7 +4,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
-
 from app.api.endpoints.summarize_endpoints import summarize_router
 
 app = FastAPI()

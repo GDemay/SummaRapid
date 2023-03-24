@@ -3,11 +3,11 @@ import os
 import openai
 from dotenv import load_dotenv
 import os
+from app.core.settings import settings
 
 class SummarizeService():
 	def __init__(self):
-		load_dotenv()
-		openai.api_key = os.getenv("OPENAI_API_KEY")
+		openai.api_key = settings.openai_api_key
 
 	def summarize_text(self, text_to_summarize):
 		if not text_to_summarize:

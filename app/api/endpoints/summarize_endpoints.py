@@ -2,14 +2,14 @@ from fastapi import APIRouter, HTTPException, Query
 from app.api.models.summarize_models import SummarizeModel
 from app.api.services.google_captcha import reCAPTCHA
 from app.api.services.summarize_service import SummarizeService
-
+from app.core.settings import settings
 summarize_router = APIRouter()
 
 
 @summarize_router.get("/")
 def index():
     print("State: Online")
-    return {"State": "Online"}
+    return {"State": "Online", "Environment": f"{settings.environment.value}]"}
 
 
 @summarize_router.post("/summarize")

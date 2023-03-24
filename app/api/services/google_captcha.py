@@ -2,19 +2,20 @@ import os
 from dotenv import load_dotenv
 import httpx
 
+from app.core.settings import Settings
+
 
 class reCAPTCHA():
 	def __init__(self):
-		load_dotenv()
-		self.recaptcha_secret_key  = os.getenv("RECAPTCHA_SECRET_KEY")
+		self.recaptcha_secret_key  = Settings.recaptcha_secret_key
 		if not self.recaptcha_secret_key:
 			raise ValueError("The reCAPTCHA secret key cannot be empty")
 
 
 	async def verify_recaptcha(self, captcha_response: str) -> bool:
-		is_development = os.getenv("ENVIRONNMENT") == "development"
-		if is_development:
-			print("Local development environment, skipping captcha verification")
+		is_local = Settings.environment.value == "local"
+		if is_local:
+			print("Local environment, skipping captcha verification")
 			return True
 		verify_url = "https://www.google.com/recaptcha/api/siteverify"
 		payload = {"secret": self.recaptcha_secret_key, "response": captcha_response}
