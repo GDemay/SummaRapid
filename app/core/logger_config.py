@@ -1,7 +1,7 @@
-# logger_config.py
 import logging
 import colorlog
 import os
+import sys
 
 def setup_logging() -> None:
     """
@@ -21,8 +21,12 @@ def setup_logging() -> None:
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
 
+    # Set up a logging handler for AWS Lambda
+    lambda_handler = logging.StreamHandler(sys.stdout)
+    lambda_handler.setFormatter(formatter)
+
     # Set up the logging configuration
     logging.basicConfig(
         level=level,
-        handlers=[handler]
+        handlers=[handler, lambda_handler]
     )

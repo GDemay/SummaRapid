@@ -9,9 +9,8 @@ summarize_router = APIRouter()
 
 @summarize_router.get("/")
 def index():
-    print("State: Online")
     logging.info("Application started with environment: %s", f"{settings.environment.value}")
-    return {"State": "Online", "Environment": f"{settings.environment.value}]"}
+    return {"State": "Online", "Environment": f"{settings.environment.value}"}
 
 
 @summarize_router.post("/summarize")
