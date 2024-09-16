@@ -1,15 +1,16 @@
+import logging
 from fastapi import APIRouter, HTTPException, Query
 from app.api.models.summarize_models import SummarizeModel
 from app.api.services.google_captcha import reCAPTCHA
 from app.api.services.summarize_service import SummarizeService
-
+from app.core.settings import settings
 summarize_router = APIRouter()
 
 
 @summarize_router.get("/")
 def index():
-    print("State: Online")
-    return {"State": "Online"}
+    logging.info("Application started with environment: %s", f"{settings.environment.value}")
+    return {"State": "Online", "Environment": f"{settings.environment.value}"}
 
 
 @summarize_router.post("/summarize")
@@ -27,15 +28,16 @@ async def create_summarize_content(
     Returns:
     - dict: A dictionary containing the summarized content.
     """
-    print("Starting Captcha check")
+    logging.info("Starting Captcha check")
     recaptcha = reCAPTCHA()
 
     is_valid_captcha = await recaptcha.verify_recaptcha(captcha)
     if not is_valid_captcha:
-        print("Invalid reCAPTCHA response")
+        logging.error("Invalid reCAPTCHA response")
         raise HTTPException(status_code=400, detail="Invalid reCAPTCHA response")
 
-    print("Captcha check passed")
+    logging.info("Captcha check passed")
     summarize_service = SummarizeService()
     summarize_content = summarize_service.summarize_text(text_to_summarize=text_to_summarize)
+    logging.info({"Text": {text_to_summarize}, "Summarized content": {summarize_content}})
     return {"summarized_content": summarize_content}

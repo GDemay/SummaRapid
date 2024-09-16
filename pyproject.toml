@@ -1,25 +1,23 @@
 [tool.poetry]
-name = "QuickSummarizer"
+name = "quicksummarizer"
 version = "0.1.0"
-description = "QuickSummarizer: Fast & Efficient Text Summarization API - Harness the power of cutting-edge NLP models to instantly condense lengthy content into concise summaries, all through an easy-to-use API powered by FastAPI"
+description = ""
 authors = ["Guillaume Demay <guillaumedemay@hotmail.fr>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 fastapi = "^0.95.0"
-uvicorn = {extras = ["standard"], version = "^0.21.1"}
-transformers = "^4.27.2"
-make = "^0.1.6.post2"
-torch = "^2.0.0"
-torchvision = "^0.15.1"
-torchaudio = "^2.0.1"
-aws-sam-cli = "^1.77.0"
 mangum = "^0.17.0"
+uvicorn = "^0.21.1"
+aws-sam-cli = "^1.78.0"
+
+
+[tool.poetry.group.dev.dependencies]
 openai = "^0.27.2"
 python-dotenv = "^1.0.0"
 httpx = "^0.23.3"
-
+colorlog = "^6.7.0"
 
 [build-system]
 requires = ["poetry-core"]

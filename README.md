@@ -1,8 +1,6 @@
-
 # QuickSummarizer API
 
 QuickSummarizer is a fast and efficient text summarization API that harnesses the power of cutting-edge NLP models to instantly condense lengthy content into concise summaries, all through an easy-to-use API powered by FastAPI. This is the API project, and it's designed to work alongside the ReactJS frontend available at [https://github.com/GDemay/SummaRapid-React](https://github.com/GDemay/SummaRapid-React). The application can be accessed at [https://www.quicksummarizer.com](https://www.quicksummarizer.com/).
-
 
 ## Installation
 
@@ -19,7 +17,7 @@ You will need to create a `.env` file at the root of the project with the follow
 ```
 OPENAI_API_KEY="XXXX"
 RECAPTCHA_SECRET_KEY="XXXX"
-ENVIRONNMENT="local"
+ENVIRONMENT="local" #
 ```
 
 Replace "XXXX" with the appropriate values:
@@ -27,8 +25,7 @@ Replace "XXXX" with the appropriate values:
 * `OPENAI_API_KEY`: Obtain an API key from [OpenAI](https://beta.openai.com/signup/).
 * `RECAPTCHA_SECRET_KEY`: Obtain a reCAPTCHA secret key from the [Google reCAPTCHA admin console](https://www.google.com/recaptcha/admin/create).
 
-For deployment to AWS Lambda, set the `ENVIRONNMENT` variable to "production" within the Lambda function.
-
+For deployment to AWS Lambda, set the `ENVIRONMENT` variable to "production" within the Lambda function.
 
 ## Running the Application
 
